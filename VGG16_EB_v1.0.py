@@ -19,19 +19,27 @@ def main(argv=None):
         with slim.arg_scope(vgg_arg_scope()):
             vgg_output, vgg_endpoints = vgg(vgg_inputs, is_training=False)
 
+
+        vgg_variables = [v for v in tf.trainable_variables()]
+
+
+
+
+
         #todo: Compute gradient layer by layer
+
+
+
         init_fn = slim.assign_from_checkpoint_fn(model_path, slim.get_model_variables('vgg_16'))
 
         with tf.Session() as sess:
             sess.run(tf.global_variables_initializer())
             init_fn(sess)
-            test_image_dir = '/Users/zijwei/datasets/imagenet_subs/n03929660'
-            image_label = 'n03929660'
-            image_index = label_names.index(image_label)
+
             test_image_name = 'demo.jpg'
 
             print 'Processing: {:s}'.format(test_image_name)
-            s_image = (Image.open(os.path.join(test_image_dir, test_image_name)).convert('RGB'))
+            s_image = (Image.open(test_image_name).convert('RGB'))
 
             s_image = s_image.resize([224, 224], resample=Image.BICUBIC)
             s_image = np.asarray(s_image, dtype=np.float32)

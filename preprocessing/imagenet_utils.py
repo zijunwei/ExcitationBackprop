@@ -22,7 +22,8 @@ def create_readable_names_for_imagenet_labels():
 
   # pylint: disable=g-line-too-long
   # base_url = 'https://raw.githubusercontent.com/tensorflow/models/master/inception/inception/data/'
-  root_file = '/Users/zwei/Dev/ExcitationBackprop/modelparams'
+  user_dir = os.path.expanduser('~')
+  root_file = os.path.join(user_dir, 'Dev/ExcitationBackprop/modelparams')
   synset_url = 'imagenet_lsvrc_2015_synsets.txt'
   synset_to_human_url = 'imagenet_metadata.txt'
 
